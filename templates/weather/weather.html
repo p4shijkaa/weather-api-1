@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Приложение для погоды</title>
+</head>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFEBCD;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .weather-info {
+            margin-top: 20px;
+        }
+    </style>
+<body>
+<div class="container">
+<h1>Прогноз погоды</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Получить результат</button>
+</form>
+
+{% if weather_dict %}
+    <div class="weather-info">
+    <h2>Данные для города {{ city }}:</h2>
+    <p>Температура: {{ weather_dict.hourly.temperature_2m.0 }}°C</p>
+    <p>Скорость ветра: {{ weather_dict.hourly.wind_speed_10m.0 }} м/с</p>
+    <p>Текущая дата: {{ current_date }} </p>
+    <p>Текущее время: {{ current_time }} </p>
+
+{% endif %}
+</div>
+</div>
+</body>
+</html>

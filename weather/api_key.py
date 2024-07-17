@@ -1,0 +1,1 @@
+openweather_api_key = '51c62acd7796641a4cbef98b59990ab4'
